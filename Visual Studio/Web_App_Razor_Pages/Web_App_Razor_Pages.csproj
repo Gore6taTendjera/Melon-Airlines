@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\book.css" />
+    <Content Remove="wwwroot\css\Dashboard.css" />
+    <Content Remove="wwwroot\css\index.css" />
+    <Content Remove="wwwroot\css\login_register.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data_Access_Layer\Data_Access_Layer.csproj" />
+    <ProjectReference Include="..\DTOs\DTOs.csproj" />
+    <ProjectReference Include="..\Enums\Enums.csproj" />
+    <ProjectReference Include="..\Logic_Layer\Logic_Layer.csproj" />
+    <ProjectReference Include="..\Shared_Classes\Shared_Classes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\book.css" />
+    <None Include="wwwroot\css\index.css" />
+    <None Include="wwwroot\css\dashboard.css" />
+    <None Include="wwwroot\css\login_register.css" />
+  </ItemGroup>
+
+</Project>

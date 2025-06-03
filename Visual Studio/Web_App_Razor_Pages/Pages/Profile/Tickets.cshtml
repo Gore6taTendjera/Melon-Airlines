@@ -1,0 +1,106 @@
+﻿@page
+@model Web_App_Razor_Pages.Pages.Profile.TicketsPageModel
+
+@{
+    ViewData["Title"] = "Profile Tickets";
+}
+
+@section Scripts {
+    <script src="~/js/userpage.js"></script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/userPage.css" />
+}
+
+@* <h1>@ViewData["Title"]</h1> *@
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (!User.IsInRole("Normal"))
+    {
+        <h1>Access denied</h1>
+    }
+    else
+    {
+        <div class="sidebar">
+            <h1 class="text-center text-bold text-title">Account</h1>
+            <h2 class="text-center">Welcome on board!</h2>
+            <br>
+            <a asp-page="/Profile/Profile">Profile</a>
+            <a asp-page="/Profile/Documents">Documents</a>
+            <a asp-page="/Profile/Tickets">Tickets</a>
+        </div>
+
+
+        <section class="section" id="section3">
+            <div class="wrapper">
+                <h2>Flight Tickets</h2>
+                <p>This is section 2 content.</p>
+
+                <div class="tickets mtop20">
+                    @foreach (var ticket in Model.Tickets)
+                    {
+                        var flight = Model.GetFlightDTOByTicketId(ticket.FlightID);
+                        <div class="ticket">
+                            <div class="ticket-title">
+                                <h3 class="text-more-bigger text-bold mright20">Melon Airlines</h3>
+                                <h3 class="text-more-bigger text-bold">Boarding Pass</h3>
+                            </div>
+                            <div class="ticket-info">
+                                <div class="ticket-column flight-number-div">
+                                    <div class="ticket-row">
+                                        <h4 class="text-bold text-center text-more-bigger mright20">Flight Number:</h4>
+                                        <h4 class="text-center text-more-bigger mleftauto">@ticket.FlightID</h4>
+                                    </div>
+                                    <div class="ticket-row">
+                                        <h4 class="text-bold mright20">From: </h4>
+                                        <h4 class="mleftauto">@flight.DepartureAirport.AirportName</h4>
+                                    </div>
+                                    <div class="ticket-row">
+                                        <h4 class="text-bold mright20">To: </h4>
+                                        <h4 class="mleftauto">@flight.ArrivalAirport.AirportName</h4>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-column">
+                                    <div class="ticket-row">
+                                        <h4 class="text-bold mright20">Departure: </h4>
+                                        <h4 class="mleftauto">@flight.DepartureTime.ToString("yyyy-MM-dd HH:mm")</h4>
+                                    </div>
+                                    <div class="ticket-row">
+                                        <h4 class="text-bold mright20">Arrival: </h4>
+                                        <h4 class="mleftauto">@flight.ArrivalTime.ToString("yyyy-MM-dd HH:mm")</h4>
+                                    </div>
+                                    <div class="ticket-row">
+                                        <h4 class="text-bold mright20">Seat: </h4>
+                                        <h4 class="mleftauto">@ticket.SeatRow@ticket.SeatColumn</h4>
+                                    </div>
+                                    <div class="ticket-row">
+                                        <h4 class="text-bold mright20">Class: </h4>
+                                        <h4 class="mleftauto">@ticket.SeatModel</h4>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-column ticket-check">
+                                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F1.bp.blogspot.com%2F-dHN4KiD3dsU%2FXRxU5JRV7DI%2FAAAAAAAAAz4%2Fu1ynpCMIuKwZMA642dHEoXFVKuHQbJvwgCEwYBhgL%2Fs1600%2Fqr-code.png&f=1&nofb=1&ipt=a515a881d093a2cf848749fcdbad4cf14f5d1fa2377719b72b83edc8d0bbe18e&ipo=images" alt="qr code image">
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+
+            </div>
+        </section>
+
+    }
+
+}
+else
+{
+    <h1 style="background: black;">UserPage Not Found Cookies</h1>
+}

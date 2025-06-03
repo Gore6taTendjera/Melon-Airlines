@@ -1,0 +1,88 @@
+﻿@page
+@model Web_App_Razor_Pages.Pages.Profile.ProfilePageModel
+@{
+    ViewData["Title"] = "Profile Details";
+}
+
+@section Scripts {
+    <script src="~/js/userpage.js"></script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/userPage.css" />
+}
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (!User.IsInRole("Normal"))
+    {
+        <h1 style="background: black;">Access denied</h1>
+    }
+    else
+    {
+        <div class="sidebar">
+            <h1 class="text-center text-bold text-title">Account</h1>
+            <h2 class="text-center">Welcome on board!</h2>
+            <br>
+            <a asp-page="/Profile/Profile">Profile</a>
+            <a asp-page="/Profile/Documents">Documents</a>
+            <a asp-page="/Profile/Tickets">Tickets</a>
+        </div>
+
+        <section class="section" id="section1">
+            <div class="wrapper">
+
+                <h1>Welcome user: @User.Identity.Name</h1>
+
+                <form method="post" class="container mt-5">
+                    <button type="submit" value="log out" asp-page-handler="Logout" class="btn customButton">Log out</button>
+                </form>
+                <div class="user-info">
+                    <h2>User Data</h2>
+                    <div class="user-field">
+                        <label>Name:</label>
+                        <span>@(Model.UserDetailsDTO?.Name ?? "Not available")</span>
+                    </div>
+                    <div class="user-field">
+                        <label>Middle Name:</label>
+                        <span>@(Model.UserDetailsDTO?.MiddleName ?? "Not available")</span>
+                    </div>
+                    <div class="user-field">
+                        <label>Surname:</label>
+                        <span>@(Model.UserDetailsDTO?.Surname ?? "Not available")</span>
+                    </div>
+                    <div class="user-field">
+                        <label>Birth Date:</label>
+                        <span>@(Model.UserDetailsDTO?.BirthDate?.ToString("yyyy-MM-dd") ?? "Not available")</span>
+                    </div>
+                    <div class="user-field">
+                        <label>Birthplace:</label>
+                        <span>@(Model.UserDetailsDTO?.BirthPlace ?? "Not available")</span>
+                    </div>
+                    <div class="user-field">
+                        <label>Nationality:</label>
+                        <span>@(Model.UserDetailsDTO?.Nationality?.ToString() ?? "Not available")</span>
+                    </div>
+                    <div class="user-field">
+                        <label>Email:</label>
+                        <span>@(Model.UserDetailsDTO?.Email ?? "Not available")</span>
+                    </div>
+                    <div class="user-field">
+                        <label>Username:</label>
+                        <span id="username">@HttpContext.Session.GetString("Username")</span>
+                    </div>
+                    <div class="user-field">
+                        <label>Password:</label>
+                        <span id="password">@HttpContext.Session.GetString("Password")</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    }
+}
+else
+{
+    <h1 style="background: black;">UserPage Not Found Cookies</h1>
+}

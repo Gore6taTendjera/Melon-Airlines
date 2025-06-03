@@ -1,0 +1,181 @@
+﻿body {
+	position: relative;
+}
+
+.sidebar {
+	width: auto;
+	height: 100%;
+	min-height: 100vh;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-right-color: rgb(185, 185, 185);
+	border-width: 2px;
+	border-style: solid;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+}
+
+	.sidebar h2 {
+		margin-bottom: 50px;
+	}
+
+	.sidebar button {
+		display: block;
+		width: 100%;
+		padding: 10px;
+		border: none;
+		background-color: transparent;
+		width: 54%;
+		margin-bottom: 5px;
+		cursor: pointer;
+		text-align: left;
+		transition: background-color 0.3s, width 0.3s; /* Add transition for smoother hover effect */
+		border-bottom: 12px ridge rgba(114, 11, 128, 0.6);
+		border-radius: 5px;
+	}
+
+		.sidebar button:hover {
+			background-color: rgba(114, 11, 128, 0.4);
+			width: 100%;
+		}
+
+		.sidebar button:active {
+			background-color: rgba(114, 11, 128, 1);
+			width: 100%;
+		}
+
+/* Hide inactive sections */
+.section:not(:first-child) {
+	display: none;
+}
+
+.section {
+	padding: 160px 0;
+	display: none;
+}
+
+#section1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	height: auto;
+	background-color: #400a47;
+	font-family: Arial, sans-serif;
+}
+
+	#section1 .user-info {
+		margin: 0 auto;
+		padding: 20px;
+		background: rgba(0, 0, 0, 0.2);
+		border-width: 1px;
+		border-style: solid;
+		border-radius: 8px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	#section1 .user-field {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 15px;
+	}
+
+		#section1 .user-field label {
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+		#section1 .user-field span {
+			color: black;
+			padding: 8px;
+			background-color: #f9f9f9;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-bottom: 5px;
+		}
+
+	#section1 #fullname,
+	#section1 #birthdatePlaceNationality {
+		white-space: nowrap;
+	}
+
+#section2 {
+	background-color: rgb(99, 99, 29);
+	height: 1000px;
+}
+
+	#section2 .passport {
+		color: #000;
+		width: 850px;
+		height: 420px;
+		background-color: #8b8b8b;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		padding: 10px;
+		margin: 20px auto;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+	}
+
+		#section2 .passport .passport-card {
+			display: flex;
+			height: 300px;
+		}
+
+		#section2 .passport .passport-photo {
+			flex: 1;
+			align-content: center;
+			align-items: center;
+			display: flex;
+			justify-content: center;
+		}
+
+			#section2 .passport .passport-photo img {
+				width: 80%;
+				height: auto;
+				border: 2px solid #ccc;
+			}
+
+		#section2 .passport .passport-details {
+			flex: 2;
+			margin-left: 20px;
+		}
+
+			#section2 .passport .passport-details p {
+				margin: 5px 0;
+				color: #000;
+			}
+
+		#section2 .passport .passport-card h3 {
+			text-align: center;
+			color: #000;
+		}
+
+		#section2 .passport .security-code {
+			margin: 0 -10px -10px;
+			padding: 15px;
+			background-color: #000;
+			flex: 1;
+			overflow: hidden;
+			word-wrap: break-word;
+		}
+
+#section3 {
+	background-color: rgb(36, 36, 25);
+	height: 1000px;
+}
+
+	#section3 .tickets {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		row-gap: 20px;
+		height: 200px;
+	}
+
+	#section3 .ticket {
+		width: 90%;
+		background-color: blueviolet;
+	}

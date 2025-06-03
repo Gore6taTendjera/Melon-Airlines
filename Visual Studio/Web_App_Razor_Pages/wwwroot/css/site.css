@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+html {
+   margin: 0;
+   padding: 0;
+}
+
+body {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, a, p, ul, li, span, label, button {
+   color: white;
+   font-size: 1.5rem;
+   font-family: Raleway;
+   font-weight: initial;
+   text-decoration: none;
+   margin: 0;
+   padding: 0;
+}
+
+.text-center {
+   text-align: center;
+}
+
+.text-right {
+   text-align: right;
+}
+
+.text-bold {
+   font-weight: bold;
+}
+
+.text-italic {
+   font-style: italic;
+}
+
+.text-smaller {
+   font-size: 1.2rem;
+}
+
+.text-small {
+   font-size: 0.8rem;
+}
+
+.text-bigger {
+   font-size: 1.5rem;
+}
+
+.text-more-bigger {
+   font-size: 1.8rem;
+}
+
+.text-title {
+   font-size: 3.5rem;
+}
+
+.text-subtitle {
+   font-size: 2.5rem;
+}
+
+.text-font-arial {
+   font-family: Arial;
+}
+
+.mtop20 {
+   margin-top: 20px;
+}
+
+.mbottom20 {
+   margin-bottom: 20px;
+}
+
+.mleft20 {
+   margin-left: 20px
+}
+
+.mright20 {
+   margin-right: 20px;
+}
+
+.mleftauto {
+   margin-left: auto;
+}
+
+.wrapper {
+   width: 1200px;
+   margin: 0 auto;
+}
+
+.text-red{
+   color: red !important;
+}
+
+.text-red span {
+   color: red !important;
+}
+
+
+.customButton {
+   background-color: #5b5b5b;
+   padding: 3px;
+   border: 3px gray solid;
+   border-radius: 5px;
+   transition: all 0.2s ease-in-out;
+}
+.customButton:hover{
+   background-color: black;
+}
+
+.navbar {
+   position: absolute;
+   top: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 80px;
+   width: 100%;
+}
+
+   .navbar .wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+   }
+      .navbar .wrapper img {
+         background-position: center;
+         background-size: cover;
+         width: 100%;
+         height: 80px;
+         border-radius: 80px;
+         display: flex;
+      }
+
+      .navbar .wrapper ul {
+         display: flex;
+         list-style-type: none;
+         padding: 0;
+      }
+
+
+         .navbar .wrapper ul li {
+            margin: 0 10px;
+         }
+
+
+footer {
+   background: rgb(92, 92, 92);
+   z-index: 5;
+   position: relative;
+}

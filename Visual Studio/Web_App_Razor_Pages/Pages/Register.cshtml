@@ -1,0 +1,50 @@
+﻿@page
+@model Web_App_Razor_Pages.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+@section Scripts {
+    <script src="~/js/login_register.js"></script>
+    <partial name="_ValidationScriptsPartial.cshtml" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/login_register.css" />
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="~/css/login_register.css" />
+</head>
+
+<section class="section1">
+    <div class="wrapper">
+        <div class="forms">
+            <div class="form-container">
+
+                <div id="registerForm" class="form-content">
+                    <h2 class="text-bold">Register</h2>
+                    <form method="post" asp-page-handler="Register" id="registerForm">
+                        <label for="registerEmail">Email:</label>
+                        <input type="email" id="registerEmail" name="Register.Email" required asp-for="Register.Email">
+                        <span asp-validation-for="Register.Email" class="text-red"></span>
+                        <label for="registerUsername">Username:</label>
+                        <input type="text" id="registerUsername" name="Register.Username" required asp-for="Register.Username">
+                        <span asp-validation-for="Register.Username" class="text-red"></span>
+                        <label for="registerPassword">Password:</label>
+                        <input type="password" id="registerPassword" name="Register.Password" required asp-for="Register.Password">
+                        <span asp-validation-for="Register.Password" class="text-red"></span>
+                        <button type="submit" onclick="validateRegisterForm()">Register</button>
+                        <a asp-page="/Login" class="text-center" id="noAcc">Have an account?</a>
+
+                        <span class="text-red">@Html.ValidationMessage("Username")</span>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

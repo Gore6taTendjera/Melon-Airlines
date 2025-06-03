@@ -1,0 +1,147 @@
+﻿@page
+@model Web_App_Razor_Pages.Pages.DashboardModel
+@{
+	ViewData["Title"] = "Dashboard";
+
+}
+
+@section Scripts {
+	<script src="~/js/dashboard.js"></script>
+}
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"]</title>
+	<link rel="stylesheet" href="~/css/dashboard.css" />
+</head>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+	if (!User.IsInRole("Admin"))
+	{
+		<h1 style="background: black;">Access Denied</h1>
+	}
+	else
+	{
+
+		<div class="sidebar">
+			<h1 class="text-center text-bold text-title">Dashboard</h1>
+			<h2 class="text-center">Welcome Admin!</h2>
+			<br>
+			<button onclick="showSectionDashboard(1)">Users</button>
+			<button onclick="showSectionDashboard(2)">Tickets</button>
+			<button onclick="showSectionDashboard(3)">Flights</button>
+		</div>
+
+		<section class="section" id="section1">
+			<div class="wrapper">
+
+				<h1>Welcome user: @User.Identity.Name</h1>
+
+				<form method="post" class="container mt-5">
+					<button type="submit" value="log out" class="btn btn-primary">Log out</button>
+				</form>
+
+
+				<h2 class="text-bold text-subtitle">Users</h2>
+				<table class="text-bigger" style="color: white;">
+					<tr bgcolor="red">
+						<th>ID</th>
+						<th>Name</th>
+						<th>Middlename</th>
+						<th>Surname</th>
+						<th>Gender</th>
+						<th>BirthDate</th>
+						<th>BirthPlace</th>
+						<th>Username</th>
+						<th>Password</th>
+						<th>Email</th>
+						<th>Nationality</th>
+						<th>Privilages</th>
+						<th>Deleted</th>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>Peter</td>
+						<td>Nichel</td>
+						<td>Yehor</td>
+						<td>Male</td>
+						<td>12/01/2024</td>
+						<td>United Kingdom London</td>
+						<td>peterBest</td>
+						<td>54643342</td>
+						<td>email@email.com</td>
+						<td>Britan</td>
+						<td>User</td>
+						<td>No</td>
+					</tr>
+				</table>
+			</div>
+		</section>
+
+		<section class="section" id="section2">
+			<div class="wrapper">
+				<h2 class="text-subtitle text-bold">Tickets</h2>
+
+				<table class="text-bigger" style="color: white;">
+					<tr bgcolor="red">
+						<th>Flight number</th>
+						<th>Origin</th>
+						<th>Destination</th>
+						<th>Departure Time</th>
+						<th>Arrival Time</th>
+						<th>Flight Duration</th>
+						<th>Canceled</th>
+					</tr>
+					<tr>
+						<td>0001</td>
+						<td>London</td>
+						<td>Paris</td>
+						<td>12:00 UTC</td>
+						<td>18:00 UTC</td>
+						<td>10 hours</td>
+						<td>No</td>
+					</tr>
+				</table>
+
+
+			</div>
+		</section>
+
+
+		<section class="section" id="section3">
+			<div class="wrapper">
+				<h2 class="text-bold text-subtitle">Flights</h2>
+
+				<table class="text-bigger" style="color: white;">
+					<tr bgcolor="red">
+						<th>Ticket number</th>
+						<th>Flight number</th>
+						<th>User id</th>
+						<th>Price</th>
+						<th>Discount</th>
+						<th>Seat row</th>
+						<th>Seat column</th>
+					</tr>
+					<tr>
+						<td>0001</td>
+						<td>HD3932</td>
+						<td>35</td>
+						<td>$12</td>
+						<td>0$</td>
+						<td>8</td>
+						<td>D</td>
+					</tr>
+				</table>
+
+			</div>
+		</section>
+
+	}
+}
+else
+{
+	<h1 style="background: black;">Dashboard Not Found Cookies</h1>
+}

@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DTOs;
+using Shared_Classes;
+
+namespace Logic_Layer.Interface.DAL
+{
+	public interface IImageDAL
+	{
+		bool InsertImage(Image image);
+		Image GetImageByUserID(int userId);
+		bool DeleteImageByUserID(int userId);
+	}
+}

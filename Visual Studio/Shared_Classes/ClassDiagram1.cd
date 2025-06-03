@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="A320" Collapsed="true">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Planes\A320.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="A380" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Planes\A380.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Plane" Collapsed="true">
+    <Position X="4.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAkAAAAAAAAAgCAAEAAEAAAAAAAAEAAAA=</HashCode>
+      <FileName>Planes\Plane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.Airport" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAiAAIAAAAAAAAAAIAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Airport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.Document" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Document.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.DocumentID" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAAAQAAAAACAAAgAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>DocumentID.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.DocumentPassport" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAAAAAAAAACAAAgAAAAAAAEAAAAAAAAAAIA=</HashCode>
+      <FileName>DocumentPassport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.Flight" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAIQAAAAIAAAAAEAAAAAAIAAAEAAIAAAAAAAA=</HashCode>
+      <FileName>Flight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.Image" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAgAAAAAABAAAAAQAAAAAAA=</HashCode>
+      <FileName>Image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.Seat" Collapsed="true">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAABAAAQAQCAABAAAAAAAAAIgAAAQAAAAAAAAQ=</HashCode>
+      <FileName>Seat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.SeatGroup" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAgAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>SeatGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.Ticket" Collapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAEAAAABAAAgAAAAEAAAggAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Ticket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shared_Classes.User" Collapsed="true">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAAgACAAQAQAAQABAAACEACAAAAAAAACAA=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Shared_Classes.FlightStatus" Collapsed="true">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAABAgAAAgAAAAAAAABAAAQAAAAAEIAAgBAAA=</HashCode>
+      <FileName>FlightStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Shared_Classes.PlaneModel" Collapsed="true">
+    <Position X="9.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlaneModel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Shared_Classes.PlaneStatus" Collapsed="true">
+    <Position X="11.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAQAAAAAAAAAAAAAASAAAAANA=</HashCode>
+      <FileName>PlaneStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Shared_Classes.SeatGroupType" Collapsed="true">
+    <Position X="8" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAASAAAAAAA=</HashCode>
+      <FileName>SeatGroupType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Shared_Classes.SeatType" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAQCAAAAAA=</HashCode>
+      <FileName>SeatType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Calibri" Size="10" />
+</ClassDiagram>

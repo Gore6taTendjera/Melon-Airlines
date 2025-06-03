@@ -1,0 +1,228 @@
+﻿.section1 {
+	background: #4b0038;
+	padding-top: 180px;
+	height: auto;
+	padding-bottom: 100px;
+}
+
+	.section1 .wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.section1 label {
+		color: #7c7ac2;
+		display: block;
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+
+	.section1 input[type="text"],
+	.section1 input[type="number"],
+	.section1 input[type="date"],
+	.section1 button[type="submit"] {
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 15px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+
+	.section1 button[type="submit"] {
+		background-color: #7c7ac2;
+		color: white;
+		border: none;
+		cursor: pointer;
+	}
+
+		.section1 button[type="submit"]:hover {
+			background-color: #3c3a5c;
+		}
+
+	.section1 .booking {
+		background: rgba(0, 0, 0, 0.2);
+		padding: 20px;
+		border-radius: 20px;
+		width: 600px;
+		margin: 0 auto;
+		margin-top: 100px;
+		border-width: 1px;
+		border-style: solid;
+	}
+
+.noAcc{
+	margin: 0 auto;
+	width: fit-content;
+}
+.noAcc:hover{
+	color: gray;
+}
+
+.ways{
+	display: flex;
+	flex-direction: row;
+	column-gap: 50px;
+}
+
+
+#section-flights {
+	padding: 50px 0 200px;
+	height: min-content;
+	background-color: #cacaca;
+}
+
+	#section-flights .flights {
+		margin: 0 auto;
+		max-width: 1450px;
+		height: min-content;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		row-gap: 20px;
+		column-gap: 20px;
+		justify-content: center;
+	}
+
+	#section-flights .flight {
+		width: 600px;
+		height: min-content;
+		padding: 5px;
+		display: flex;
+		flex-direction: column;
+		border: 3px #f7f7f7 solid;
+		border-radius: 10px;
+		background-color: rgba(54, 54, 54, 0.762);
+		transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+	}
+
+		#section-flights .flight:hover {
+			-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,1);
+			-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,1);
+			box-shadow: 0px 0px 15px 0px rgba(0,0,0,1);
+			border-color: white;
+			transform: scale(1.015);
+		}
+
+	#section-flights .flight-title {
+		align-items: center;
+		border-bottom: 3px #bd979123 solid;
+		padding: 5px 20px;
+		display: flex;
+		flex-direction: row;
+		height: min-content;
+		justify-content: center;
+	}
+
+		#section-flights .flight-title img {
+			width: 50px;
+			height: 50px;
+			fill: rgba(0, 0, 0, 1);
+		}
+
+		#section-flights .flight-title .plane {
+			filter: invert(100%);
+		}
+
+	#section-flights .flight-info {
+		justify-content: space-between;
+		padding: 10px;
+		height: 100%;
+		display: flex;
+		flex-direction: row;
+	}
+
+	#section-flights .flight-column {
+		justify-content: space-between;
+		display: flex;
+		flex-direction: column;
+		width: 240px;
+	}
+
+	#section-flights .flight-row {
+		display: flex;
+		flex-direction: row;
+		row-gap: 10px;
+		justify-content: space-between;
+	}
+
+	#section-flights button {
+		align-self: center;
+		width: 100%;
+		height: 40px;
+		background-color: #4b0038;
+		transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+		border: 3px #60606096 solid;
+		border-radius: 10px;
+	}
+
+		#section-flights button:hover {
+			background-color: #4b003880;
+			border-color: #f7f7f7;
+		}
+
+
+
+
+
+
+
+.section2 {
+	background-color: #6ba5af;
+	padding: 20px;
+}
+
+.offers {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	row-gap: 10px;
+	column-gap: 8px;
+}
+
+.offer {
+	background-color: #3c3a5c;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	padding: 20px;
+	flex: 1 1 20%;
+	transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+	position: relative;
+}
+
+	.offer:hover {
+		box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+		border-color: #d7b000;
+		transform: scale(1.01);
+	}
+
+		.offer:hover img {
+			filter: brightness(0.85);
+		}
+
+	.offer img {
+		width: 100%;
+		height: auto;
+		border-radius: 5px;
+		filter: brightness(0.7);
+	}
+
+.offer-content {
+	position: absolute;
+	width: 75%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: #fff;
+}
+
+.section3 {
+	height: 100px;
+	padding: 20px;
+	background-color: #f5f5f5;
+}
+
+	.section3 .wrapper {
+		max-width: 650px;
+	}

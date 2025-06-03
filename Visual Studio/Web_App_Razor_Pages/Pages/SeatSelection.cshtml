@@ -1,0 +1,205 @@
+﻿@page
+@model Web_App_Razor_Pages.Pages.SeatSelectionModel
+@{
+	var seatClasses = new Dictionary<Enums.SeatModel, string>
+	{
+		{ Enums.SeatModel.First, "A380seat-first" },
+		{ Enums.SeatModel.Business, "A380seat-business" },
+		{ Enums.SeatModel.Economy, "A380seat-economy" }
+	};
+}
+
+@section Scripts {
+	<script src="~/js/SeatSelection.js"></script>
+	<partial name="_ValidationScriptsPartial.cshtml" />
+}
+
+@section Styles {
+	<link rel="stylesheet" href="~/css/SeatSelection.css" />
+}
+
+<section id="section1">
+	<div class="wrapper">
+		<h1 class="text-title text-center text-bold">Seat Selection</h1>
+		<p class="text-center text-italic text-smaller mtop20">
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+			Molestias. Esse, repudiandae.
+		</p>
+		<div class="ChoseRandom">
+			<h2 class="text-bold text-subtitle mtop20 text-center">Select an option:</h2>
+			<div class="mtop20">
+				<input type="radio" name="seatSelection" value="random" id="randomSeat" onclick="choseRandomOrNo(this)">
+				<label for="randomSeat">Select random seat</label>
+
+			</div>
+
+			<br>
+			<div>
+				<input type="radio" name="seatSelection" value="selectNow" id="selectNow" onclick="choseRandomOrNo(this)">
+				<label for="selectNow">Select seat now</label>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+
+
+<section id="section-select-seatType">
+	<div class="select-seatType">
+		<h2 class="text-bold text-subtitle text-center mbottom20">Select Seat Class:</h2>
+		<input type="radio" name="seatClass" value="First" id="firstClass" onclick="updateSeatClass(this)">
+		<label for="firstClass">First Class</label>
+		<br>
+		<input type="radio" name="seatClass" value="Business" id="businessClass" onclick="updateSeatClass(this)">
+		<label for="businessClass">Business Class</label>
+		<br>
+		<input type="radio" name="seatClass" value="Economy" id="economyClass" onclick="updateSeatClass(this)">
+		<label for="economyClass">Economy Class</label>
+	</div>
+</section>
+
+<section id="section2">
+	<div class="wrapper">
+
+		<div class="color-agenda">
+			<h2 class="text-bold text-center text-more-bigger mbottom20">Seat color agenda</h2>
+			<div class="color-agenda-row">
+				<div class="color-agenda-color"></div>
+				<h2 class="mleft20">First class</h2>
+			</div>
+			<div class="color-agenda-row">
+				<div class="color-agenda-color"></div>
+				<h2 class="mleft20">Business class</h2>
+			</div>
+			<div class="color-agenda-row">
+				<div class="color-agenda-color"></div>
+				<h2 class="mleft20">Economy class</h2>
+			</div>
+			<div class="color-agenda-row">
+				<div class="color-agenda-color"></div>
+				<h2 class="mleft20">Taken</h2>
+			</div>
+		</div>
+
+		@if (Model.plane.PlaneModel == Shared_Classes.PlaneModel.A380)
+		{
+			<h2 class="text-center mbottom20">Floors:</h2>
+			<div class="A380RadioButtons">
+				<ul>
+					<li>
+						<input type="radio" id="first_floor" name="floor" value="1" checked onchange="changeFloor()">
+						<label for="first_floor" class="text-bold">1</label>
+					</li>
+					<li>
+						<input type="radio" id="second_floor" name="floor" value="2" onchange="changeFloor()">
+						<label for="second_floor" class="text-bold">2</label>
+					</li>
+				</ul>
+			</div>
+		}
+
+		<div class="plane A380plane floor1">
+			<div class="cockpit">
+				<h1 class="text-italic">Cockpit</h1>
+			</div>
+			<div class="exit exit--front fuselage"></div>
+			<ol class="cabin fuselage">
+				@for (int row = 1; row <= Model.MaxRow; row++)
+				{
+					<li class="row row--@row">
+						<ol class="seats" type="A">
+							@foreach (var column in new[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K' })
+							{
+								var seat = Model.Seats.FirstOrDefault(s => s.Row == row && s.Column == column);
+								if (seat != null && (seat.SeatModel == Enums.SeatModel.First || seat.SeatModel == Enums.SeatModel.Economy))
+								{
+									int seatRow = seat.Row;
+									char seatColumn = seat.Column;
+									var seatClass = seatClasses[seat.SeatModel];
+									<li class="seat @(seat.Taken ? "seat-taken" : "") @seatClass" onclick="selectSeat('@seatRow', '@seatColumn')">
+										<input type="radio" name="selectedSeat" id="@seatRow@seatColumn" value="@seatRow@seatColumn" @(seat.Taken ? "disabled" : "") />
+										<label for="@seatRow@seatColumn">@seatRow@seatColumn</label>
+									</li>
+								}
+							}
+						</ol>
+					</li>
+				}
+			</ol>
+			<div class="exit exit--back fuselage"></div>
+		</div>
+
+		<div class="plane A380plane floor2">
+			<div class="cockpit">
+				<h1 class="text-italic">Cockpit</h1>
+			</div>
+			<div class="exit exit--front fuselage"></div>
+			<ol class="cabin fuselage">
+				@for (int row = 1; row <= Model.MaxRow; row++)
+				{
+					<li class="row row--@row">
+						<ol class="seats" type="A">
+							@foreach (var column in new[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K' })
+							{
+								var seat = Model.Seats.FirstOrDefault(s => s.Row == row && s.Column == column && s.SeatModel == Enums.SeatModel.Business);
+								if (seat != null)
+								{
+									int seatRow = seat.Row;
+									char seatColumn = seat.Column;
+									var seatClass = seatClasses[seat.SeatModel];
+									<li class="seat @(seat.Taken ? "seat-taken" : "") @seatClass" onclick="selectSeat('@seatRow', '@seatColumn')">
+										<input type="radio" name="selectedSeat" id="@seatRow@seatColumn" value="@seatRow@seatColumn" @(seat.Taken ? "disabled" : "") />
+										<label for="@seatRow@seatColumn">@seatRow@seatColumn</label>
+									</li>
+								}
+							}
+						</ol>
+					</li>
+				}
+			</ol>
+			<div class="exit exit--back fuselage"></div>
+		</div>
+
+	</div>
+</section>
+
+
+<section id="section-confirm">
+	<div class="wrapper">
+
+
+
+		<div class="calculate-price">
+			<div class="calculate-price-info">
+				<h2 class="text-bold">Seat:</h2>
+				<h2 id="seatRowColumn" class="mleft20">@Model.seatModel.SeatRow@Model.seatModel.SeatColumn</h2>
+			</div>
+			<div class="calculate-price-info">
+				<h2 class="text-bold">Seat class:</h2>
+				<h2 id="seatModel" class="mleft20">@Model.seatModel.seatModel</h2>
+			</div>
+			<div class="calculate-price-info">
+				<h2 class="text-bold">Price:</h2>
+				<h2 id="seatPrice" class="mleft20">@Model.seatModel.SeatPrice</h2>
+			</div>
+			<form id="calculatePriceForm" class="mtop20" method="post" asp-page-handler="CalculatePrice">
+				<input asp-for="seatModel.SeatRow" type="hidden" id="seatRowCalculatePrice" name="seatModel.SeatRow" value="" />
+				<input asp-for="seatModel.SeatColumn" type="hidden" id="seatColumnCalculatePrice" name="seatModel.SeatColumn" value="" />
+				<input asp-for="seatModel.seatModel" type="hidden" id="selectedSeatClassCalculatePrice" name="seatClass" value="" />
+				<input type="hidden" id="seatSelectionCalculatePrice" name="seatSelection" value="" />
+
+				<button type="submit" class="customButton">Calculate</button>
+			</form>
+		</div>
+
+
+		<form id="confirmForm" class="confirm hidden" method="post" asp-page-handler="Confirm">
+			<input type="hidden" id="seatRowConfirm" name="seatModel.SeatRow" asp-for="seatModel.SeatRow" value="" />
+			<input type="hidden" id="seatColumnConfirm" name="seatModel.SeatColumn" asp-for="seatModel.SeatColumn" value="" />
+			<button type="submit" class="confirm-button" class="customButton">Confirm</button>
+		</form>
+
+
+	</div>
+</section>

@@ -1,0 +1,50 @@
+﻿@page
+@model Web_App_Razor_Pages.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    var usernameCookie = Request.Cookies["Username"];
+}
+
+@section Scripts{
+   <script src="~/js/login.js"></script>
+   <partial name="_ValidationScriptsPartial.cshtml" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/login_register.css" />
+}
+
+
+<section class="section1">
+    <div class="wrapper">
+        <div class="forms">
+            <div class="form-container">
+                <div id="loginForm" class="form-content">
+                    <h2 class="text-bold">Login</h2>
+
+
+
+                    <form method="post" asp-page-handler="Login" id="loginForm">
+                        <label for="loginUsername">Username:</label>
+                        <input type="text" id="loginUsername" name="Login.Username" required asp-for="Login.Username" value="@usernameCookie">
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" id="loginPassword" name="Login.Password" required asp-for="Login.Password">
+                        <div class="remember-me">
+                            <input asp-for="Login.RememberMe" type="checkbox">
+                            <label asp-for="Login.RememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" onclick="validateLoginForm()">Login</button>
+
+                        <span asp-validation-for="Login" class="text-red text-center text-smaller text-italic"></span>
+
+                        <a asp-page="/Register" class="text-center" id="noAcc">Don't have an account?</a>
+                    </form>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

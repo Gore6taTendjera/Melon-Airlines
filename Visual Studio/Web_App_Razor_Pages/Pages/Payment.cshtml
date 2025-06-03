@@ -1,0 +1,118 @@
+﻿@page
+@model Web_App_Razor_Pages.Pages.PaymentModel
+@{
+}
+
+@section Scripts {
+    <script src="~/js/payment.js"></script>
+    <partial name="_ValidationScriptsPartial.cshtml" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/SeatSelection.css" />
+    <link rel="stylesheet" href="~/css/payment.css" />
+}
+
+<section id="section1">
+    <div class="wrapper">
+        <h1 class="text-title text-center text-bold">Complete your booking</h1>
+        <p class="text-center text-italic text-smaller mtop20">Choose a payment method.</p>
+    </div>
+</section>
+
+<section id="summary-section">
+    <div class="wrapper">
+        <div class="summary">
+            <div class="summary-title">
+                <h2 class="text-bold text-subtitle text-center">Summary:</h2>
+            </div>
+            <div class="summary-body">
+                <div class="summary-row">
+                    <h2 class="text-bold">Seat:</h2>
+                    <h2>@Model.seatModel.SeatRow@Model.seatModel.SeatColumn</h2>
+                </div>
+                <div class="summary-row">
+                    <div>
+                        <h2 class="text-bold">Price:</h2>
+                        <p class="text-italic text-small">Including seat price</p>
+                    </div>
+                    <h2>$@Model.seatModel.SeatPrice</h2>
+                </div>
+                <div class="summary-row">
+                    <h2 class="text-bold">Departure:</h2>
+                    <h2>@Model.flight.DepartureAirport.AirportName</h2>
+                </div>
+                <div class="summary-row">
+                    <h2 class="text-bold">Departure Time:</h2>
+                    <h2>@Model.flight.DepartureTime</h2>
+                </div>
+                <div class="summary-row">
+                    <h2 class="text-bold">Arrival:</h2>
+                    <h2>@Model.flight.ArrivalAirport.AirportName</h2>
+                </div>
+                <div class="summary-row">
+                    <h2 class="text-bold">Arrival Time:</h2>
+                    <h2>@Model.flight.ArrivalTime</h2>
+                </div>
+                <div class="summary-row">
+                    <h2 class="text-bold">Plane:</h2>
+                    <h2>@Model.flight.Plane.PlaneModel</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="payment-section">
+    <div class="wrapper">
+        <div class="payment">
+            <div class="payment-method">
+                <input type="radio" id="credit-card" name="payment-method" value="credit-card-details" checked>
+                <label for="credit-card">Credit Card</label>
+                <input type="radio" id="paypal" name="payment-method" value="paypal-details">
+                <label for="paypal">PayPal</label>
+            </div>
+            <div id="credit-card-details" class="payment-details active">
+                <form id="creditCardPayment" class="mtop20" method="post" asp-page-handler="CreditCardPayment" novalidate>
+                    <div>
+                        <label for="cc-name">Cardholder Name:</label>
+                        <input type="text" id="cc-name" asp-for="creditCard.CardholderName" placeholder="John Doe">
+                        <span asp-validation-for="creditCard.CardholderName" class="text-red"></span>
+                    </div>
+                    <div>
+                        <label for="cc-number">Credit Card Number:</label>
+                        <input type="text" id="cc-number" asp-for="creditCard.CreditCardNumber" required placeholder="1234 5678 9012 3456">
+                        <span asp-validation-for="creditCard.CreditCardNumber" class="text-red"></span>
+                    </div>
+                    <div>
+                        <label for="cc-expiry">Expiry Date:</label>
+                        <input type="text" id="cc-expiry" asp-for="creditCard.ExpiryDate" placeholder="MM/YY">
+                        <span asp-validation-for="creditCard.ExpiryDate" class="text-red"></span>
+                    </div>
+                    <div>
+                        <label for="cc-cvv">CVV:</label>
+                        <input type="text" id="cc-cvv" asp-for="creditCard.CVV" required placeholder="123">
+                        <span asp-validation-for="creditCard.CVV" class="text-red"></span>
+                    </div>
+
+                    <button type="submit">Pay with Credit Card</button>
+
+                    <span asp-validation-for="creditCard" class="text-red text-center text-italic"></span>
+                </form>
+            </div>
+            <div id="paypal-details" class="payment-details">
+                <form id="paypalPayment" class="mtop20" method="post" asp-page-handler="PayPalPayment" novalidate>
+                    <div>
+                        <label type="text">PayPal Email:</label>
+                        <input type="email" id="paypal-email" asp-for="payPal.Email" required placeholder="email@example.com">
+                        <span asp-validation-for="payPal.Email" class="text-red"></span>
+                    </div>
+
+                    <button type="submit">Pay with PayPal</button>
+
+                    <span asp-validation-for="payPal" class="text-red text-center text-italic"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,192 @@
+﻿@page
+@model Web_App_Razor_Pages.Pages.BookModel
+@{
+}
+
+@section Scripts {
+	<script src="~/js/book.js"></script>
+	<partial name="_ValidationScriptsPartial.cshtml" />
+}
+
+@section Styles {
+	<link rel="stylesheet" href="~/css/book.css" />
+}
+
+<section class="section1">
+	<div class="wrapper">
+		<h1 class="text-title text-center text-bold">Book a Flight</h1>
+		<p class="text-center text-italic text-smaller mtop20">
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+			Molestias. Esse, repudiandae.
+		</p>
+		<div class="booking">
+			<form method="post" asp-page-handler="SearchFlights">
+				<div class="form-group">
+					
+				</div>
+
+				<div class="form-group">
+					<label for="origin">Origin:</label>
+					<input type="text" class="form-control" id="origin" name="FlightSearch.Origin" placeholder="Enter origin" asp-for="FlightSearch.Origin">
+					<span asp-validation-for="FlightSearch.Origin" class="text-red"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="destination">Destination:</label>
+					<input type="text" class="form-control" id="destination" name="FlightSearch.Destination" placeholder="Enter destination" asp-for="FlightSearch.Destination">
+					<span asp-validation-for="FlightSearch.Destination" class="text-red"></span>
+				</div>
+
+				<div class="form-group">
+					<label for="departure_date">Departure:</label>
+					<input type="date" class="form-control" id="departure_date" name="FlightSearch.DepartureDate" asp-for="FlightSearch.DepartureDate">
+					<span asp-validation-for="FlightSearch.DepartureDate" class="text-red"></span>
+				</div>
+
+				<div class="form-group" id="returnDateGroup">
+					<label for="return_date">Return:</label>
+					<input type="date" class="form-control" id="return_date" name="FlightSearch.ReturnDate" asp-for="FlightSearch.ReturnDate">
+					<span asp-validation-for="FlightSearch.ReturnDate" class="text-red"></span>
+				</div>
+
+				<div class="ways mbottom20">
+					<div>
+						<label for="one_way">One Way</label>
+						<input type="radio" id="one_way" name="flightType" value="one_way" checked onclick="toggleReturnDate(false)">
+					</div>
+					<div>
+						<label for="two_way">Two Way</label>
+						<input type="radio" id="two_way" name="flightType" value="two_way" onclick="toggleReturnDate(true)">
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Search</button>
+			</form>
+		</div>
+
+		@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+		{
+			<div class="text-red text-italic text-center text-bigger">
+				@Model.ErrorMessage
+			</div>
+			<a asp-page="/Login" class="text-center noAcc">Sign In</a>
+			<a asp-page="/Register" class="text-center noAcc">Sign Up</a>
+		}
+
+		@if (!string.IsNullOrEmpty(Model.NoFlightsMessage))
+		{
+			<div class="text-red text-italic text-center text-bigger">
+				@Model.NoFlightsMessage
+			</div>
+		}
+
+	</div>
+</section>
+
+@if (Model.Flights != null && Model.Flights.Any())
+{
+	<section id="section-flights">
+		<h1 class="text-bold text-title text-center mbottom20">Flights</h1>
+		<div class="flights">
+			@foreach (var flight in Model.Flights)
+			{
+				var departureTime = DateTime.Parse(flight.DepartureTime.ToString());
+				var arrivalTime = DateTime.Parse(flight.ArrivalTime.ToString());
+
+
+				var duration = arrivalTime - departureTime;
+
+				<div class="flight">
+					<div class="flight-title">
+						<h3 class="text-bold text-subtitle">@flight.DepartureAirport.City</h3>
+						<img class="mleft20" src="https://flagicons.lipis.dev/flags/4x3/@(flight.DepartureAirport.Country.ToLower().Replace(" ", "-")).svg" alt="">
+
+						<img class="mleft20 plane" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Plane_font_awesome.svg/1200px-Plane_font_awesome.svg.png" alt="">
+
+						<h3 class="mleft20 text-bold text-subtitle">@flight.ArrivalAirport.City</h3>
+						<img class="mleft20" src="https://flagicons.lipis.dev/flags/4x3/@(flight.ArrivalAirport.Country.ToLower().Replace(" ", "-")).svg" alt="">
+					</div>
+					<div class="flight-info">
+						<div class="flight-column">
+							<div class="flight-row">
+								<h3 class="text-bold">Departure Time: </h3>
+								<h3>@departureTime.ToString("HH:mm")</h3>
+							</div>
+							<div class="flight-row">
+								<h3 class="text-bold">Arrival Time: </h3>
+								<h3>@arrivalTime.ToString("HH:mm")</h3>
+							</div>
+							<div class="flight-row">
+								<h3 class="text-bold">Duration:</h3>
+								<h3>@duration.Hours hr @duration.Minutes min</h3>
+							</div>
+						</div>
+						<div class="flight-column">
+							<div class="flight-row">
+								<h3 class="text-bold">Plane:</h3>
+								<h3>@flight.Plane</h3>
+							</div>
+							<div class="flight-row">
+								<h3 class="text-bold">Base Price:</h3>
+								<h3>$@flight.Price</h3>
+							</div>
+							<form id="selectFlightForm" method="post" asp-page-handler="SelectFlight">
+								<input type="hidden" id="selectedFlightId" name="SelectedFlightId" value="@flight.FlightId" />
+								<button type="submit" class="text-bold">Select</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</section>
+
+}
+
+
+<section class="section2">
+	<div class="wrapper">
+		<div class="offers">
+			<div class="offer">
+				<img src="https://static-00.iconduck.com/assets.00/hand-bank-card-2-icon-512x330-u3rsed4k.png" alt="Melon Priority Card">
+				<div class="offer-content">
+					<h2 class="text-bold">Melon Priority Card</h2>
+					<p class="text-smaller">Enjoy exclusive benefits with our Melon Priority Card. Get priority boarding, lounge access, and more!</p>
+				</div>
+			</div>
+			<div class="offer">
+				<img src="https://static-00.iconduck.com/assets.00/alarm-clock-emoji-2048x2048-runz9hz6.png" alt="Last Minute Deals">
+				<div class="offer-content">
+					<h2 class="text-bold">Last Minute Deals</h2>
+					<p class="text-smaller">Book your last-minute flights and save big! Limited-time offers available for select destinations.</p>
+				</div>
+			</div>
+			<div class="offer">
+				<div class="offer-content">
+					<h2 class="text-bold">Family Vacation Package</h2>
+					<p class="text-smaller">Plan your next family getaway with our special vacation package. Discounts for children and family-friendly amenities included!</p>
+				</div>
+			</div>
+			<div class="offer">
+				<img src="https://static.vecteezy.com/system/resources/previews/021/013/593/non_2x/key-lock-icon-on-transparent-background-free-png.png" alt="Business Class Upgrade">
+				<div class="offer-content">
+					<h2 class="text-bold">Business Class Upgrade</h2>
+					<p class="text-smaller">Elevate your travel experience with our business class upgrade. Enjoy extra legroom, gourmet meals, and priority service.</p>
+				</div>
+			</div>
+			<div class="offer">
+				<img src="https://static-00.iconduck.com/assets.00/north-east-facing-airplane-emoji-512x512-1myaxg2s.png" alt="Explore Europe">
+				<div class="offer-content">
+					<h2 class="text-bold">Explore Europe</h2>
+					<p class="text-smaller">Discover the charm of Europe with our discounted fares. Explore iconic cities and breathtaking landscapes.</p>
+				</div>
+			</div>
+			<div class="offer">
+				<div class="offer-content">
+					<h2 class="text-bold">Travel Insurance</h2>
+					<p class="text-smaller">Ensure peace of mind with our comprehensive travel insurance plans. Protect your trip against unexpected events.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

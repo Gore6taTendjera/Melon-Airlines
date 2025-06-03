@@ -1,0 +1,365 @@
+﻿#section1 {
+	background: #2a8297;
+	padding-top: 180px;
+	height: auto;
+	padding-bottom: 100px;
+}
+
+	#section1 .wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+#section2 {
+	display: none;
+	padding: 100px 0;
+	height: min-content;
+	background: linear-gradient(to bottom, #2a8297, #206575);
+}
+
+
+.color-agenda {
+	width: fit-content;
+	margin: 0 auto;
+	margin-bottom: 50px;
+	display: flex;
+	flex-direction: column;
+}
+
+	.color-agenda .color-agenda-color {
+		width: 50px;
+		height: 50px;
+		border-radius: 200px;
+	}
+
+	.color-agenda .color-agenda-row {
+		margin-bottom: 10px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+		.color-agenda .color-agenda-row:nth-child(2) .color-agenda-color {
+			background-color: #5cb6ff;
+		}
+
+		.color-agenda .color-agenda-row:nth-child(3) .color-agenda-color {
+			background-color: #5C6AFF;
+		}
+
+		.color-agenda .color-agenda-row:nth-child(4) .color-agenda-color {
+			background-color: orange;
+		}
+
+		.color-agenda .color-agenda-row:nth-child(5) .color-agenda-color {
+			background-color: red;
+		}
+
+
+
+	#section2 .floor2 {
+		display: none;
+	}
+
+	#section2 .plane {
+		margin: 0 auto;
+		max-width: min-content;
+	}
+
+	#section2 .cockpit {
+		height: 250px;
+		position: relative;
+		overflow: hidden;
+		text-align: center;
+		border-bottom: 5px solid #d8d8d8;
+	}
+
+		#section2 .cockpit:before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 500px;
+			width: 100%;
+			border-radius: 50%;
+			border-right: 5px solid #d8d8d8;
+			border-left: 5px solid #d8d8d8;
+		}
+
+		#section2 .cockpit h1 {
+			width: 60%;
+			margin: 100px auto 35px;
+		}
+
+	#section2 .exit {
+		position: relative;
+		height: 50px;
+	}
+
+		#section2 .exit:before,
+		#section2 .exit:after {
+			content: "EXIT";
+			font-size: 14px;
+			line-height: 18px;
+			padding: 0 2px;
+			font-family: "Arial Narrow", Arial, sans-serif;
+			display: block;
+			position: absolute;
+			background: green;
+			color: white;
+			top: 50%;
+			transform: translate(0, -50%);
+		}
+
+		#section2 .exit:before {
+			left: 0;
+		}
+
+		#section2 .exit:after {
+			right: 0;
+		}
+
+	#section2 .fuselage {
+		border-right: 5px solid #d8d8d8;
+		border-left: 5px solid #d8d8d8;
+	}
+
+	#section2 ol {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	#section2 .seats {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+	}
+
+
+
+	#section2 .seat {
+		display: flex;
+		padding: 5px;
+		flex: 1 0 0;
+		position: relative;
+		min-width: 45px;
+		max-width: 130px;
+	}
+
+	#section2 .A380seat-first {
+		margin-right: initial !important;
+	}
+
+		#section2 .A380seat-first label {
+			background: #5cb6ff !important;
+		}
+
+		#section2 .A380seat-first:nth-child(1) {
+			margin-right: 20px !important;
+		}
+
+		#section2 .A380seat-first:nth-child(3) {
+			margin-right: 20px !important;
+		}
+
+	#section2 .seat:nth-child(3) {
+		margin-right: 23px;
+	}
+
+
+
+	#section2 .A380seat-economy label {
+		background-color: orange !important;
+	}
+
+	#section2 .A380seat-economy:nth-child(3) {
+		margin-right: 12px !important;
+	}
+
+	#section2 .A380seat-economy:nth-child(7) {
+		margin-right: 12px !important;
+	}
+
+
+
+	#section2 .A380seat-business {
+		margin-right: initial !important;
+	}
+
+		#section2 .A380seat-business label {
+			background-color: #5C6AFF !important;
+		}
+
+	#section2 .A380seat-business:nth-child(2) {
+		margin-right: 12px !important;
+	}
+
+	#section2 .A380seat-business:nth-child(4) {
+		margin-right: 12px !important;
+	}
+
+
+	#section2 .A380RadioButtons{
+		display: flex;
+		flex-direction: row;
+		margin: 0 auto;
+		width: 300px;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+
+	#section2 .A380RadioButtons ul{
+		list-style: none;
+		display: flex;
+		flex-direction: row;
+		gap: 5px;
+	}
+
+	#section2 .A380RadioButtons label {
+		background-color: gray;
+		/*border: 2px darkgray solid;*/
+		border-radius: 4px;
+		padding: 5px;
+		transition: all 0.2s ease-in-out;
+		cursor: pointer;
+	}
+		#section2 .A380RadioButtons input {
+			display: none;
+		}
+
+		#section2 .A380RadioButtons input:checked ~ label {
+			background-color: darkgray;
+		}
+
+
+	#section2 .seat-taken label {
+		background-color: red !important;
+		box-shadow: none !important;
+		cursor: not-allowed !important;
+	}
+
+	#section2 .seat input {
+		position: absolute;
+		display: none;
+	}
+
+		#section2 .seat input:checked ~ label {
+			scale: 1.2;
+			border: 2px red solid;
+		}
+
+	#section2 .seat label {
+		display: block;
+		position: relative;
+		width: 100%;
+		text-align: center;
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 1.5rem;
+		padding: 4px 0;
+		background: #7be000;
+		border-radius: 5px;
+		animation-duration: 300ms;
+		animation-fill-mode: both;
+		transition: all 0.2s ease-in-out;
+	}
+
+		#section2 .seat label:before {
+			content: "";
+			position: absolute;
+			width: 75%;
+			height: 75%;
+			top: 1px;
+			left: 50%;
+			transform: translate(-50%, 0%);
+			background: rgba(255, 255, 255, .4);
+			border-radius: 3px;
+		}
+
+		#section2 .seat label:hover {
+			cursor: pointer;
+			box-shadow: 0 0 0 2px #5C6AFF;
+		}
+
+
+#section-confirm {
+	padding: 80px 0;
+	height: fit-content;
+	background-color: #0088c3;
+}
+
+.calculate-price {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	margin: 0 auto;
+	border: 3px #206575 solid;
+	border-radius: 4px;
+}
+
+.calculate-price-info {
+	border-bottom: 2px rgba(255, 255, 255, 0.552) solid;
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 20px;
+}
+
+
+.calculate-price button {
+	margin: 0 auto;
+}
+
+.confirm {
+	display: flex;
+	width: 400px;
+	margin: 40px auto 0;
+	justify-content: center;
+}
+
+.confirm-button {
+	margin: 0 auto;
+}
+
+
+
+
+
+
+
+#section-select-seatType {
+	padding: 60px 0;
+	display: none;
+	height: fit-content;
+	background: linear-gradient(to bottom, #2a8297, #206575);
+}
+
+.select-seatType {
+	margin: 0 auto;
+	width: fit-content;
+}
+
+
+
+
+.hidden {
+	display: none;
+}
+
+
+.ChoseRandom {
+	margin: 0 auto;
+	width: fit-content;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}

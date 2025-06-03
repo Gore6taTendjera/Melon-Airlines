@@ -1,0 +1,293 @@
+﻿@page
+@using Enums
+@using System
+@using System.Text
+@model Web_App_Razor_Pages.Pages.Profile.DocumentsPageModel
+@{
+	ViewData["Title"] = "Profile Documents";
+
+	string GenerateRandomSymbols(int length)
+	{
+		var random = new Random();
+		var sb = new StringBuilder();
+		string symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+=-[]{}|;:,.<>?";
+
+		for (int i = 0; i < length; i++)
+		{
+			sb.Append(symbols[random.Next(symbols.Length)]);
+		}
+
+		return sb.ToString();
+	}
+
+	// Generate 100 random symbols
+	var randomSymbols = GenerateRandomSymbols(100);
+	var randomSymbols2 = GenerateRandomSymbols(100);
+
+	bool anyUserDetailsPropertyIsNull = Model.AnyUserDetails();
+	bool anyPassportDetails = Model.MissingPassportDetails();
+	bool anyIdDetails = Model.MissingIdDetails();
+}
+
+@section Scripts {
+	<script src="~/js/userpage.js"></script>
+	<partial name="_ValidationScriptsPartial.cshtml" />
+}
+
+@section Styles {
+	<link rel="stylesheet" href="~/css/userPage.css" />
+}
+
+@* <h1>@ViewData["Title"]</h1> *@
+
+
+
+
+<div class="sidebar">
+	<h1 class="text-center text-bold text-title">Account</h1>
+	<h2 class="text-center">Welcome on board!</h2>
+	<br>
+	<a asp-page="/Profile/Profile">Profile</a>
+	<a asp-page="/Profile/Documents">Documents</a>
+	<a asp-page="/Profile/Tickets">Tickets</a>
+</div>
+
+<section class="section" id="section2">
+	<div class="wrapper">
+		<h2 class="text-subtitle text-bold">Documents</h2>
+
+
+		@if (Model.documentPassportDetails != null && Model.documentPassportDetails.DocumentNumber != null && !anyUserDetailsPropertyIsNull)
+		{
+			<div class="imageForm">
+				<div>
+					<h2 class="text-title text-bold text-italic mbottom20 newSign">NEW</h2>
+					<h2 class="text-bigger text-bold">Skip face recognition by uploading an image</h2>
+					<span class="text-small text-italic text-right">Optional</span>
+				</div>
+				<form method="post" enctype="multipart/form-data" asp-page-handler="UploadImage" novalidate>
+					<div class="form-group">
+						<label asp-for="Image" class="text-bold">Image:</label>
+						<input asp-for="Image" type="file" name="imageFile" accept="image/*" class="form-control" />
+						<span asp-validation-for="Image" class="text-red"></span>
+					</div>
+					<div class="form-group">
+						<button type="submit" value="Submit" class="customButton">Upload Profile Image</button>
+					</div>
+				</form>
+
+				@if (Model.ImageDTO != null && Model.ImageDTO.Data != null)
+				{
+					<form method="post" asp-page-handler="DeleteImage" onsubmit="return confirm('Are you sure you want to delete the image?');">
+						<button class="customButton" type="submit">Delete Profile Image</button>
+					</form>
+				}
+			</div>
+
+		}
+
+
+		@if (Model.documentPassportDetails != null && Model.documentPassportDetails.DocumentNumber != null && !anyUserDetailsPropertyIsNull)
+		{
+			<div class="passport">
+				<h3 class="text-bold">Passport</h3>
+				<div class="passport-card">
+					<div class="passport-photo">
+						@if (Model.ImageDTO != null && Model.ImageDTO.Data != null && !string.IsNullOrEmpty(Model.ImageDTO.ContentType))
+						{
+							<img src="data:@Model.ImageDTO.ContentType;base64,@(Convert.ToBase64String(Model.ImageDTO.Data))" alt="Passport Photo">
+						}
+						else
+						{
+							<img src="https://api-private.atlassian.com/users/6b5c1609134a5887d7f3ab1b73557664/avatar" alt="Passport Photo">
+						}
+					</div>
+					<div class="passport-details">
+						<p><strong>Passport No: </strong>@(Model.documentPassportDetails.DocumentNumber ?? "N/A")</p>
+						<p><strong>1. Surname: </strong>@(Model.UserProfileDetails.Surname ?? "N/A")</p>
+						<p><strong>2. Given Names: </strong>@(Model.UserProfileDetails.Name ?? "N/A") @(Model.UserProfileDetails.MiddleName ?? "")</p>
+						<p><strong>3. Nationality: </strong>@((Model.UserProfileDetails.Nationality?.ToString() ?? "N/A"))</p>
+						<p><strong>4. Date of birth: </strong>@(Model.UserProfileDetails.BirthDate?.ToString("dd-MM-yyyy") ?? "N/A")</p>
+						<p><strong>5. Gender: </strong>@((Model.UserProfileDetails.Gender?.ToString() ?? "N/A"))</p>
+						<p><strong>6. Place of birth: </strong>@(Model.UserProfileDetails.BirthPlace ?? "N/A")</p>
+						<p><strong>7. Date of issue: </strong>@(Model.documentPassportDetails.DateOfIssue?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+						<p><strong>8. Date of expiry: </strong>@(Model.documentPassportDetails.DateOfExpire?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+					</div>
+				</div>
+				<div class="security-code">
+					<p>
+						@randomSymbols
+					</p>
+				</div>
+			</div>
+		}
+		else if (anyPassportDetails && !anyUserDetailsPropertyIsNull)
+		{
+			<div class="no-passport">
+				@* <p class="no-passport-message">No Passport details available.</p> *@
+				<form method="post" asp-page-handler="UpdatePassport" novalidate>
+
+					<h3 class="passport-details-heading">Provide Passport Details</h3>
+
+					<div class="form-group">
+						<label for="passportNumber">Passport Number:</label>
+						<input asp-for="documentPassportDetails.DocumentNumber" id="passportNumber" class="form-control" placeholder="Enter Passport Number" required />
+						<span asp-validation-for="documentPassportDetails.DocumentNumber" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="dateOfIssue">Date of Issue:</label>
+						<input asp-for="documentPassportDetails.DateOfIssue" id="dateOfIssue" class="form-control" type="date" required />
+						<span asp-validation-for="documentPassportDetails.DateOfIssue" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="dateOfExpiry">Date of Expiry:</label>
+						<input asp-for="documentPassportDetails.DateOfExpire" id="dateOfExpiry" class="form-control" type="date" required />
+						<span asp-validation-for="documentPassportDetails.DateOfExpire" class="text-red"></span>
+
+					</div>
+
+					<button type="submit" class="customButton">Submit</button>
+				</form>
+			</div>
+		}
+
+		@if (anyUserDetailsPropertyIsNull)
+		{
+			<h2>Please enter your details before creating a document.</h2>
+			<div class="profile-details">
+				<h3>User Profile Details</h3>
+				<form method="post" asp-page-handler="UpdateUser" novalidate>
+					<div class="form-group">
+						<label>Name:</label>
+						<input asp-for="UserProfileDetails.Name" placeholder="Enter Name" required class="input-text" />
+						<span asp-validation-for="UserProfileDetails.Name" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label>Middle Name:</label>
+						<input asp-for="UserProfileDetails.MiddleName" placeholder="Enter Middle Name" required class="input-text" />
+						<span asp-validation-for="UserProfileDetails.MiddleName" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label>Surname:</label>
+						<input asp-for="UserProfileDetails.Surname" placeholder="Enter Surname" required class="input-text" />
+						<span asp-validation-for="UserProfileDetails.Surname" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label>Gender:</label>
+						<select asp-for="UserProfileDetails.Gender" required class="input-text">
+							<option value="">Select Gender</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>
+						<span asp-validation-for="UserProfileDetails.Gender" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label>Date of Birth:</label>
+						<input asp-for="UserProfileDetails.BirthDate" type="date" required class="input-text" />
+						<span asp-validation-for="UserProfileDetails.BirthDate" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label>Place of Birth:</label>
+						<input asp-for="UserProfileDetails.BirthPlace" placeholder="Enter Place of Birth" required class="input-text" />
+						<span asp-validation-for="UserProfileDetails.BirthPlace" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label>Email:</label>
+						<input asp-for="UserProfileDetails.Email" placeholder="Enter Email" required class="input-text" />
+						<span asp-validation-for="UserProfileDetails.Email" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label>Nationality:</label>
+						<select asp-for="UserProfileDetails.Nationality" required class="input-text">
+							<option value="">Select Nationality</option>
+							@foreach (var nationality in Enum.GetValues(typeof(Enums.Nationality)))
+							{
+								<option value="@nationality">@nationality</option>
+							}
+						</select>
+						<span asp-validation-for="UserProfileDetails.Nationality" class="text-red"></span>
+					</div>
+
+					<button type="submit" class="customButton">Submit</button>
+				</form>
+			</div>
+		}
+
+
+
+		@if (Model.documentIDDetails != null && Model.documentIDDetails.DocumentNumber != null && !anyUserDetailsPropertyIsNull)
+		{
+			<div class="passport" id="idDocument">
+				<h3 class="text-bold">ID</h3>
+				<div class="passport-card">
+					<div class="passport-photo">
+						@if (Model.ImageDTO != null && Model.ImageDTO.Data != null && !string.IsNullOrEmpty(Model.ImageDTO.ContentType))
+						{
+							<img src="data:@Model.ImageDTO.ContentType;base64,@(Convert.ToBase64String(Model.ImageDTO.Data))" alt="ID Photo">
+						}
+						else
+						{
+							<img src="https://api-private.atlassian.com/users/6b5c1609134a5887d7f3ab1b73557664/avatar" alt="ID Photo">
+						}
+					</div>
+					<div class="passport-details">
+						<p><strong>ID No: </strong>@(Model.documentIDDetails.DocumentNumber ?? "N/A")</p>
+						<p><strong>1. Surname: </strong>@(Model.UserProfileDetails.Surname ?? "N/A")</p>
+						<p><strong>2. Given Names: </strong>@(Model.UserProfileDetails.Name ?? "N/A") @(Model.UserProfileDetails.MiddleName ?? "")</p>
+						<p><strong>3. Nationality: </strong>@((Model.UserProfileDetails.Nationality?.ToString() ?? "N/A"))</p>
+						<p><strong>4. Date of birth: </strong>@(Model.UserProfileDetails.BirthDate?.ToString("dd-MM-yyyy") ?? "N/A")</p>
+						<p><strong>5. Gender: </strong>@((Model.UserProfileDetails.Gender?.ToString() ?? "N/A"))</p>
+						<p><strong>6. Place of birth: </strong>@(Model.UserProfileDetails.BirthPlace ?? "N/A")</p>
+						<p><strong>7. Date of issue: </strong>@(Model.documentIDDetails.DateOfIssue?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+						<p><strong>8. Date of expiry: </strong>@(Model.documentIDDetails.DateOfExpire?.ToString("yyyy-MM-dd") ?? "N/A")</p>
+					</div>
+				</div>
+				<div class="security-code">
+					<p>
+						@randomSymbols2
+					</p>
+				</div>
+			</div>
+		}
+		else if (anyIdDetails && !anyUserDetailsPropertyIsNull)
+		{
+			<div class="no-passport">
+				@* <p class="no-passport-message">No ID details available.</p> *@
+				<form method="post" asp-page-handler="UpdateID" novalidate>
+
+					<h3 class="passport-details-heading">Provide ID Details</h3>
+
+					<div class="form-group">
+						<label for="passportNumber">ID Number:</label>
+						<input asp-for="documentIDDetails.DocumentNumber" id="passportNumber" class="form-control" placeholder="Enter ID Number" required />
+						<span asp-validation-for="documentIDDetails.DocumentNumber" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="dateOfIssue">Date of Issue:</label>
+						<input asp-for="documentIDDetails.DateOfIssue" id="dateOfIssue" class="form-control" type="date" required />
+						<span asp-validation-for="documentIDDetails.DateOfIssue" class="text-red"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="dateOfExpiry">Date of Expiry:</label>
+						<input asp-for="documentIDDetails.DateOfExpire" id="dateOfExpiry" class="form-control" type="date" required />
+						<span asp-validation-for="documentIDDetails.DateOfExpire" class="text-red"></span>
+
+					</div>
+
+					<button type="submit" class="customButton">Submit</button>
+				</form>
+			</div>
+		}
+	</div>
+</section>
